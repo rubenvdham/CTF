@@ -12,12 +12,18 @@
 
 ### Detecting shells
 1. Look for (reverse) shells in the process tree:
-`ps -eaf --forest`
+```
+ps -eaf --forest
+```
 
 2. Grab current working directory:
-`ls -al /proc/pid | grep cwd`
+```
+ls -al /proc/pid | grep cwd
+```
 3. Grab network socket stats for pid:
-`ss -anp pid | grep pid`
+```
+ss -anp pid | grep pid
+```
 
 
 
@@ -25,7 +31,11 @@
 ## Networking
 
 - grab all network stats:
-`ss -lnpt`
+```
+ss -lnpt
+```
 - capture network traffic
-`tcpdump -i interface -w output.pcap -n 'not port 22' -s 0`
+```
+tcpdump -i interface -w output.pcap -n 'not port 22' -s 0
+```
 
