@@ -1,0 +1,11 @@
+# Nmap 7.91 scan initiated Mon Feb 22 10:28:17 2021 as: nmap -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p1-65535 -oN tcp-full.nmap -sV 10.10.10.3
+Nmap scan report for 10.10.10.3
+Host is up (0.00079s latency).
+Not shown: 65534 filtered ports
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.2.15 ((CentOS) DAV/2 PHP/5.3.3)
+MAC Address: 08:00:27:A5:A6:76 (Oracle VirtualBox virtual NIC)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Feb 22 10:30:36 2021 -- 1 IP address (1 host up) scanned in 139.72 seconds
