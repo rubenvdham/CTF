@@ -30,5 +30,11 @@ sudo nmap -Pn -sU -A -oN udp-extra.nmap -p {PORTS} {IP}
 
 ## Enumeration
 
+### Enum4linux
+
+```
+enum4linux {ip}
+```
+
 
 
