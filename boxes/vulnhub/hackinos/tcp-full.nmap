@@ -1,0 +1,31 @@
+# Nmap 7.91 scan initiated Thu Mar 11 10:23:56 2021 as: nmap -A -oA tcp-full.nmap 10.10.10.10
+Nmap scan report for 10.10.10.10
+Host is up (0.00057s latency).
+Not shown: 998 closed ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 d9:c1:5c:20:9a:77:54:f8:a3:41:18:92:1b:1e:e5:35 (RSA)
+|   256 df:d4:f2:61:89:61:ac:e0:ee:3b:5d:07:0d:3f:0c:87 (ECDSA)
+|_  256 8b:e4:45:ab:af:c8:0e:7e:2a:e4:47:e7:52:f9:bc:71 (ED25519)
+8000/tcp open  http    Apache httpd 2.4.25 ((Debian))
+|_http-generator: WordPress 5.0.3
+|_http-open-proxy: Proxy might be redirecting requests
+| http-robots.txt: 2 disallowed entries 
+|_/upload.php /uploads
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Blog &#8211; Just another WordPress site
+MAC Address: 08:00:27:20:A9:BC (Oracle VirtualBox virtual NIC)
+Device type: general purpose
+Running: Linux 3.X|4.X
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+OS details: Linux 3.2 - 4.9
+Network Distance: 1 hop
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.57 ms 10.10.10.10
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Mar 11 10:24:10 2021 -- 1 IP address (1 host up) scanned in 14.57 seconds
