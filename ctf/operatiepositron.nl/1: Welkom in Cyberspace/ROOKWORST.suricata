@@ -1,0 +1,5 @@
+# Suricata 6.0.4
+
+alert tcp any any -> any any (content: "GET"; content: "Mozilla/5.0 (Windows NT 10.0\; Win64\; x64\; rv:42.0) Gecko/20100101 Firefox/42.0"; content: "Cookies: PHPSESSID="; pcre: "/PHPSESSID=[a-z0-9]{32}/"; msg: "[ZUURKOOL]: ROOKWORST backdoor implant: beacon"; sid:7328; rev:2; reference:url,2020/00325/DOC-CY; classtype:trojan-activity;)
+
+alert tcp any any -> any any (content: "POST"; content: "Mozilla/5.0 (Windows NT 10.0\; Win64\; x64\; rv:42.0) Gecko/20100101 Firefox/42.0"; content: "Content-Type: text/plain"; content: "Cookies: PHPSESSID="; pcre: "/PHPSESSID=[a-z0-9]{32}/"; content: "data="; pcre: "/data=[A-Za-z0-9_\-\=]+/"; msg: "[ZUURKOOL]: ROOKWORST backdoor implant: results beacon"; sid:7329; rev:2; reference:url,2020/00325/DOC-CY; classtype:trojan-activity;)

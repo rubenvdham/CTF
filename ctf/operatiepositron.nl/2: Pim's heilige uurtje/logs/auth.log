@@ -1,0 +1,160 @@
+Feb  7 04:17:01 ubuntu CRON[16371]: pam_unix(cron:session): session opened for user root by (uid=0)
+Feb  7 04:17:01 ubuntu CRON[16371]: pam_unix(cron:session): session closed for user root
+Feb  7 04:30:01 ubuntu CRON[16517]: pam_unix(cron:session): session opened for user root by (uid=0)
+Feb  7 04:30:01 ubuntu CRON[16517]: pam_unix(cron:session): session closed for user root
+Feb  7 04:45:19 ubuntu gdm-password]: gkr-pam: unlocked login keyring
+Feb  7 05:16:20 ubuntu gdm-password]: gkr-pam: unlocked login keyring
+Feb  7 05:17:01 ubuntu CRON[16955]: pam_unix(cron:session): session opened for user root by (uid=0)
+Feb  7 05:17:01 ubuntu CRON[16955]: pam_unix(cron:session): session closed for user root
+Feb  7 05:18:37 ubuntu sudo: fileserver : TTY=pts/2 ; PWD=/var/log ; USER=root ; COMMAND=/usr/bin/systemctl status sshd
+Feb  7 05:18:37 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Feb  7 05:18:37 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Feb  7 05:30:01 ubuntu CRON[17119]: pam_unix(cron:session): session opened for user root by (uid=0)
+Feb  7 05:30:01 ubuntu CRON[17119]: pam_unix(cron:session): session closed for user root
+Feb  7 05:38:23 ubuntu gdm-password]: gkr-pam: unlocked login keyring
+Feb  7 05:41:49 ubuntu sudo: fileserver : TTY=pts/2 ; PWD=/var/log ; USER=root ; COMMAND=/bin/bash
+Feb  7 05:41:49 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Feb  7 05:42:00 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Feb  7 05:43:52 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-process:17363:3608162 (system bus name :1.381 [/usr/bin/pkttyagent --notify-fd 5 --fallback], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 05:43:55 ubuntu polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:fileserver to gain TEMPORARY authorization for action org.freedesktop.systemd1.manage-units for system-bus-name::1.382 [systemctl reload sshd] (owned by unix-user:fileserver)
+Feb  7 05:43:55 ubuntu sshd[10558]: Received SIGHUP; restarting.
+Feb  7 05:43:55 ubuntu sshd[10558]: Server listening on 0.0.0.0 port 22.
+Feb  7 05:43:55 ubuntu sshd[10558]: Server listening on :: port 22.
+Feb  7 05:43:56 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-process:17363:3608162 (system bus name :1.381, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 05:47:13 ubuntu sshd[17400]: Accepted password for root from 10.42.42.4 port 45382 ssh2
+Feb  7 05:47:13 ubuntu sshd[17400]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Feb  7 05:47:7 ubuntu systemd-logind[735]: New session 21 of user root.
+Feb  7 05:47:7 ubuntu systemd: pam_unix(systemd-user:session): session opened for user root by (uid=0)
+Feb  7 06:05:01 ubuntu gdm-password]: pam_unix(gdm-password:auth): authentication failure; logname= uid=0 euid=0 tty=/dev/tty1 ruser= rhost=  user=fileserver
+Feb  7 06:05:05 ubuntu gdm-password]: gkr-pam: unlocked login keyring
+Feb  7 06:05:25 ubuntu sudo: fileserver : TTY=pts/2 ; PWD=/home/fileserver/Desktop ; USER=root ; COMMAND=/usr/bin/su
+Feb  7 06:05:25 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Feb  7 06:05:25 ubuntu su: (to root) fileserver on pts/2
+Feb  7 06:05:25 ubuntu su: pam_unix(su:session): session opened for user root by (uid=0)
+Feb  7 06:05:49 ubuntu su: pam_unix(su:session): session closed for user root
+Feb  7 06:05:49 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Feb  7 06:05:59 ubuntu su: pam_unix(su:session): session closed for user root
+Feb  7 06:05:59 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Feb  7 06:06:11 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:2 (system bus name :1.77, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 06:06:11 ubuntu gdm-password]: pam_unix(gdm-password:session): session closed for user fileserver
+Feb  7 06:06:12 ubuntu systemd-logind[735]: Session 2 logged out. Waiting for processes to exit.
+Feb  7 06:06:12 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm by (uid=0)
+Feb  7 06:06:12 ubuntu systemd-logind[735]: New session c2 of user gdm.
+Feb  7 06:06:12 ubuntu systemd: pam_unix(systemd-user:session): session opened for user gdm by (uid=0)
+Feb  7 06:06:13 ubuntu systemd-logind[735]: Removed session 2.
+Feb  7 06:06:7 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c2 (system bus name :1.447 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 06:06:25 ubuntu gdm-password]: gkr-pam: unable to locate daemon control file
+Feb  7 06:06:25 ubuntu gdm-password]: gkr-pam: stashed password to try later in open session
+Feb  7 06:06:25 ubuntu gdm-password]: pam_unix(gdm-password:session): session opened for user fileserver by (uid=0)
+Feb  7 06:06:25 ubuntu systemd-logind[735]: New session 24 of user fileserver.
+Feb  7 06:06:25 ubuntu systemd: pam_unix(systemd-user:session): session opened for user fileserver by (uid=0)
+Feb  7 06:06:26 ubuntu gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Feb  7 06:06:28 ubuntu gnome-keyring-daemon[18521]: The PKCS#11 component was already initialized
+Feb  7 06:06:28 ubuntu gnome-keyring-daemon[18521]: The Secret Service was already initialized
+Feb  7 06:06:30 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:24 (system bus name :1.479 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 06:06:34 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Feb  7 06:06:34 ubuntu systemd-logind[735]: Session c2 logged out. Waiting for processes to exit.
+Feb  7 06:06:34 ubuntu systemd-logind[735]: Removed session c2.
+Feb  7 06:06:35 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:c2 (system bus name :1.447, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 06:06:38 ubuntu dbus-daemon[699]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Feb  7 06:06:41 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:24 (system bus name :1.479, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 06:06:41 ubuntu gdm-password]: pam_unix(gdm-password:session): session closed for user fileserver
+Feb  7 06:06:41 ubuntu systemd-logind[735]: Session 24 logged out. Waiting for processes to exit.
+Feb  7 06:06:42 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm by (uid=0)
+Feb  7 06:06:42 ubuntu systemd-logind[735]: New session c3 of user gdm.
+Feb  7 06:06:43 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c3 (system bus name :1.500 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 06:06:47 ubuntu systemd-logind[735]: Removed session 24.
+Feb  7 06:06:47 ubuntu gdm-password]: gkr-pam: unable to locate daemon control file
+Feb  7 06:06:47 ubuntu gdm-password]: gkr-pam: stashed password to try later in open session
+Feb  7 06:06:47 ubuntu gdm-password]: pam_unix(gdm-password:session): session opened for user fileserver by (uid=0)
+Feb  7 06:06:47 ubuntu systemd-logind[735]: New session 26 of user fileserver.
+Feb  7 06:06:47 ubuntu gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Feb  7 06:06:50 ubuntu gnome-keyring-daemon[19285]: The Secret Service was already initialized
+Feb  7 06:06:50 ubuntu gnome-keyring-daemon[19285]: The PKCS#11 component was already initialized
+Feb  7 06:06:51 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:26 (system bus name :1.523 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 06:06:56 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Feb  7 06:06:56 ubuntu systemd-logind[735]: Session c3 logged out. Waiting for processes to exit.
+Feb  7 06:06:57 ubuntu systemd-logind[735]: Removed session c3.
+Feb  7 06:06:57 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:c3 (system bus name :1.500, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 06:07:06 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:26 (system bus name :1.523, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 06:07:06 ubuntu gdm-password]: pam_unix(gdm-password:session): session closed for user fileserver
+Feb  7 06:07:06 ubuntu systemd-logind[735]: Session 26 logged out. Waiting for processes to exit.
+Feb  7 06:07:06 ubuntu systemd-logind[735]: Removed session 26.
+Feb  7 06:07:06 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm by (uid=0)
+Feb  7 06:07:06 ubuntu systemd-logind[735]: New session c4 of user gdm.
+Feb  7 06:07:08 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c4 (system bus name :1.547 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 06:07:08 ubuntu dbus-daemon[699]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Feb  7 06:07:7 ubuntu gdm-password]: gkr-pam: unable to locate daemon control file
+Feb  7 06:07:7 ubuntu gdm-password]: gkr-pam: stashed password to try later in open session
+Feb  7 06:07:7 ubuntu gdm-password]: pam_unix(gdm-password:session): session opened for user fileserver by (uid=0)
+Feb  7 06:07:7 ubuntu systemd-logind[735]: New session 27 of user fileserver.
+Feb  7 06:07:7 ubuntu gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Feb  7 06:07:17 ubuntu gnome-keyring-daemon[19995]: The Secret Service was already initialized
+Feb  7 06:07:17 ubuntu gnome-keyring-daemon[19995]: The PKCS#11 component was already initialized
+Feb  7 06:07:19 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:27 (system bus name :1.571 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 06:07:24 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Feb  7 06:07:24 ubuntu systemd-logind[735]: Session c4 logged out. Waiting for processes to exit.
+Feb  7 06:07:24 ubuntu systemd-logind[735]: Removed session c4.
+Feb  7 06:07:24 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:c4 (system bus name :1.547, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 06:07:34 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:27 (system bus name :1.571, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 06:07:35 ubuntu gdm-password]: pam_unix(gdm-password:session): session closed for user fileserver
+Feb  7 06:07:35 ubuntu systemd-logind[735]: Session 27 logged out. Waiting for processes to exit.
+Feb  7 06:07:35 ubuntu systemd-logind[735]: Removed session 27.
+Feb  7 06:07:35 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm by (uid=0)
+Feb  7 06:07:35 ubuntu systemd-logind[735]: New session c5 of user gdm.
+Feb  7 06:07:35 ubuntu systemd: pam_unix(systemd-user:session): session opened for user gdm by (uid=0)
+Feb  7 06:07:36 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c5 (system bus name :1.608 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 06:07:41 ubuntu gdm-password]: gkr-pam: unable to locate daemon control file
+Feb  7 06:07:41 ubuntu gdm-password]: gkr-pam: stashed password to try later in open session
+Feb  7 06:07:41 ubuntu gdm-password]: pam_unix(gdm-password:session): session opened for user fileserver by (uid=0)
+Feb  7 06:07:41 ubuntu systemd-logind[735]: New session 29 of user fileserver.
+Feb  7 06:07:41 ubuntu gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Feb  7 06:07:42 ubuntu dbus-daemon[699]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Feb  7 06:07:44 ubuntu gnome-keyring-daemon[20807]: The Secret Service was already initialized
+Feb  7 06:07:44 ubuntu gnome-keyring-daemon[20807]: The PKCS#11 component was already initialized
+Feb  7 06:07:46 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:29 (system bus name :1.629 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 06:07:48 ubuntu sshd[17400]: Received disconnect from 10.42.42.4 port 45382:11: disconnected by user
+Feb  7 06:07:48 ubuntu sshd[17400]: Disconnected from user root 10.42.42.4 port 45382
+Feb  7 06:07:48 ubuntu sshd[17400]: pam_unix(sshd:session): session closed for user root
+Feb  7 06:07:48 ubuntu systemd-logind[735]: Session 21 logged out. Waiting for processes to exit.
+Feb  7 06:07:51 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Feb  7 06:07:51 ubuntu systemd-logind[735]: Session c5 logged out. Waiting for processes to exit.
+Feb  7 06:07:52 ubuntu systemd-logind[735]: Removed session c5.
+Feb  7 06:07:52 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:c5 (system bus name :1.608, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 06:08:09 ubuntu dbus-daemon[699]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Feb  7 06:08:48 ubuntu systemd-logind[735]: System is rebooting.
+Feb  7 15:09:12 ubuntu systemd-logind[774]: New seat seat0.
+Feb  7 15:09:12 ubuntu systemd-logind[774]: Watching system buttons on /dev/input/event0 (Power Button)
+Feb  7 15:09:12 ubuntu systemd-logind[774]: Watching system buttons on /dev/input/event1 (AT Translated Set 2 keyboard)
+Feb  7 15:09:13 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm by (uid=0)
+Feb  7 15:09:13 ubuntu systemd-logind[774]: New session c1 of user gdm.
+Feb  7 15:09:13 ubuntu systemd: pam_unix(systemd-user:session): session opened for user gdm by (uid=0)
+Feb  7 15:09:20 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.40 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 15:09:26 ubuntu gdm-password]: gkr-pam: unable to locate daemon control file
+Feb  7 15:09:26 ubuntu gdm-password]: gkr-pam: stashed password to try later in open session
+Feb  7 15:09:26 ubuntu gdm-password]: pam_unix(gdm-password:session): session opened for user fileserver by (uid=0)
+Feb  7 15:09:26 ubuntu systemd-logind[774]: New session 2 of user fileserver.
+Feb  7 15:09:26 ubuntu systemd: pam_unix(systemd-user:session): session opened for user fileserver by (uid=0)
+Feb  7 15:09:26 ubuntu gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Feb  7 15:09:29 ubuntu gnome-keyring-daemon[1363]: The PKCS#11 component was already initialized
+Feb  7 15:09:29 ubuntu gnome-keyring-daemon[1363]: The Secret Service was already initialized
+Feb  7 15:09:31 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.75 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Feb  7 15:09:36 ubuntu gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Feb  7 15:09:36 ubuntu systemd-logind[774]: Session c1 logged out. Waiting for processes to exit.
+Feb  7 15:09:36 ubuntu systemd-logind[774]: Removed session c1.
+Feb  7 15:09:36 ubuntu polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.40, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Feb  7 15:09:39 ubuntu dbus-daemon[742]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Feb  7 15:17:01 ubuntu CRON[2235]: pam_unix(cron:session): session opened for user root by (uid=0)
+Feb  7 15:17:01 ubuntu CRON[2235]: pam_unix(cron:session): session closed for user root
+Feb  7 15:18:12 ubuntu su: pam_unix(su:session): session closed for user root
+Feb  7 15:18:12 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Feb  7 15:30:01 ubuntu CRON[2275]: pam_unix(cron:session): session opened for user root by (uid=0)
+Feb  7 15:30:01 ubuntu CRON[2275]: pam_unix(cron:session): session closed for user root
+Feb  7 15:36:08 ubuntu sshd[2283]: Accepted password for root from 10.42.42.4 port 48594 ssh2
+Feb  7 15:36:08 ubuntu sshd[2283]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Feb  7 15:36:08 ubuntu systemd-logind[774]: New session 7 of user root.
+Feb  7 15:36:08 ubuntu systemd: pam_unix(systemd-user:session): session opened for user root by (uid=0)
+Feb  7 15:39:03 ubuntu sshd[2283]: Received disconnect from 10.42.42.4 port 48594:11: disconnected by user
+Feb  7 15:39:03 ubuntu sshd[2283]: Disconnected from user root 10.42.42.4 port 48594
+Feb  7 15:39:03 ubuntu sshd[2283]: pam_unix(sshd:session): session closed for user root
+Feb  7 15:39:03 ubuntu systemd-logind[774]: Session 7 logged out. Waiting for processes to exit.
