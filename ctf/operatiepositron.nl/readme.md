@@ -232,6 +232,17 @@ ZUURKOOL heeft de credentials bemachtigd van `Exchange.electron.local` door Mimi
 We hebben twee implant binaries veilig weten te stellen bij Electron B.V. Ze zaten op twee verschillende systemen en lijken variaties te zijn voor Windows en Linux.
 
 
+#### FLAG: Strings
+
+De eerste flag kunnen we vinden door `strings` te runnen op de binary `apt-update`:
+```
+C, Port: Mode: , IP: , Username: , Password: Dit programma is onderdeel van de challenges bij de AIVD podcast 'De Dienst: Operatie Positron'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+/contact//contact/reserveren/contact/formulier/
+POSITRON{34syfl4g_w1th_str1ngs_n0g_tw33_t3_g44n}ROTATE_SCHEDULEe206a54e97690cce50cc872dd70ee896assertion failed: (*tail).value.is_none()/rustc/6abb6385b2cb7249f67b9b3ce7522527767dd907/library/std/src/sync/mpsc/mpsc_queue.rsassertion failed: (*next).value.is_some()
+```
+
+Als we beide binaries analyzen in Ghidra, zien we dat de decompiler flink moeite heeft. Het lijkt er op dat de implant een SOCKS server draait met RC4 of chacha20 encryptie. Ook komen we de verwijzing "main_stage" tegen. Ook zijn er 3 urls te vinden
+
 #### Vragen
 ##### Hoe ziet het communicatieprotocol van de implant eruit?
 
@@ -240,3 +251,5 @@ We hebben twee implant binaries veilig weten te stellen bij Electron B.V. Ze zat
 ##### Welke functionaliteiten biedt de implant voor de operator?
 
 ##### Wat is de interne naam van de implant-suite?
+
+main_stage?
