@@ -119,6 +119,7 @@ This URL leads us to a registration page of Rocketchat:
 ![d53c1b51748e454bdf4d9fed2b46015d.png](./_resources/d53c1b51748e454bdf4d9fed2b46015d-1.png)
 
 After registering we end up with access to a Channel called "General". In this chat we see Jim introduce Dwight's bot. If you watched the show, it's totally a Dwight thing to implement such a thing to be able to socialize less with his coworkers. The bot seems to have some sort wrapped SCP functionality as mentioned in point 3:
+
 ![709b8ed9231846e177fcabf7f86cd3ce.png](./_resources/709b8ed9231846e177fcabf7f86cd3ce-1.png)
 
 We try to interact with the bot. We notice the list command has identical output to the `ls` command. Unfortunately we cannot inject OS commands easily, as that's detected by the bot:
