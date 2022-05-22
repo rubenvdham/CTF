@@ -1,0 +1,18 @@
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://paper.htb/
+[+] Method:                  GET
+[+] Threads:                 20
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Timeout:                 10s
+===============================================================
+2022/05/21 11:58:25 Starting gobuster in directory enumeration mode
+===============================================================
+/manual               (Status: 301) [Size: 232] [--> http://paper.htb/manual/]
+===============================================================
+2022/05/21 12:19:38 Finished
+===============================================================
